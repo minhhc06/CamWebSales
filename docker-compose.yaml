@@ -43,6 +43,8 @@ services:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
-
+volumes:
+    postgresql_cam_web_sale:
+        driver: local
 networks:
     cam-web-sale-network:
