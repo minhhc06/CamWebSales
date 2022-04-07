@@ -6,7 +6,7 @@ services:
         ports:  
             - 5438:5432  
         volumes:  
-            - postgresql_data:/bitnami/postgresql  
+            - postgresql_cam_web_sale:/bitnami/postgresql  
         env_file: ./.docker.env
         restart: always  
         networks:  
@@ -17,7 +17,6 @@ services:
         env_file: ./.docker.env
         build:
             context: .
-            target: development
             dockerfile: ./Dockerfile
         command: npm run start:debug
         ports:
@@ -34,7 +33,6 @@ services:
         env_file: ./.docker.env
         build:
             context: .
-            target: production
             dockerfile: ./Dockerfile
         command: npm run start:prod
         ports:
