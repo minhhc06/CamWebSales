@@ -4,7 +4,7 @@ services:
     db:
         image: bitnami/postgresql:11
         ports:  
-            - 5438:5432  
+            - 5439:5432  
         volumes:  
             - postgresql_cam_web_sale:/bitnami/postgresql  
         env_file: ./.docker.env
@@ -18,7 +18,6 @@ services:
         build:
             context: .
             dockerfile: ./Dockerfile
-        command: npm run start:debug
         ports:
             - 3020:3020
         networks:
@@ -34,7 +33,6 @@ services:
         build:
             context: .
             dockerfile: ./Dockerfile
-        command: npm run start:prod
         ports:
             - 3030:3030
         networks:
