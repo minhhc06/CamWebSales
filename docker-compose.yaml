@@ -22,7 +22,7 @@ services:
         ports:
             - 3030:3030
         networks:
-            - lamont-network
+            - web-cam-sale-network
         depends_on: 
             - db
         restart: always
