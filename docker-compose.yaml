@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
     db:
@@ -7,42 +7,30 @@ services:
             - 5439:5432  
         volumes:  
             - postgresql_cam_web_sale:/bitnami/postgresql  
-        env_file: ./.docker.env
+        env_file:  
+            - .docker.env  
         restart: always  
         networks:  
-            - cam-web-sale-network
+            - web-cam-sale-network
     dev:
-        container_name: cam_web_sale_dev
-        image: cam-web-sale-dev:1.0.0
-        env_file: ./.docker.env
+        container_name: cam_web_sale
+        image: cam_web_sale:1.0.0
         build:
             context: .
             dockerfile: ./Dockerfile
-        ports:
-            - 3020:3020
-        networks:
-            - cam-web-sale-network
-        volumes:
-            - .:/usr/src/app
-            - /usr/src/app/node_modules
-        restart: unless-stopped
-    prod:
-        container_name: cam_web_sale_prod
-        image: cam-web-sale-prod:1.0.0
-        env_file: ./.docker.env
-        build:
-            context: .
-            dockerfile: ./Dockerfile
+
         ports:
             - 3030:3030
         networks:
-            - cam-web-sale-network
-        volumes:
-            - .:/usr/src/app
-            - /usr/src/app/node_modules
-        restart: unless-stopped
+            - lamont-network
+        depends_on: 
+            - db
+        restart: always
+    
 volumes:
     postgresql_cam_web_sale:
         driver: local
+
+
 networks:
-    cam-web-sale-network:
+    web-cam-sale-network:
